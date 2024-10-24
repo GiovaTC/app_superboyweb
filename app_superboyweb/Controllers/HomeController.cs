@@ -20,12 +20,14 @@ namespace app_superboyweb.Controllers
         [HttpGet]
         public IActionResult Index()
         {
-            var identity = new Identity(); // Or fetch a single identity from your database
-            return View(identity);
-        }
 
-        // POST: Home/Index
-        [HttpPost]
+            {
+                var identity = new Identity { Id = 1, Nombre = "Juan", Correo = "juan@example.com" };
+                return View(identity); // Pasando un solo objeto Identity
+            }
+        }
+            // POST: Home/Index
+            [HttpPost]
         public IActionResult Create(Identity model)
         {
             if (ModelState.IsValid)
