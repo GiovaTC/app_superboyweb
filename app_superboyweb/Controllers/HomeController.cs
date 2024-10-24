@@ -20,14 +20,21 @@ namespace app_superboyweb.Controllers
         [HttpGet]
         public IActionResult Index()
         {
+            // Recupera el primer registro de la tabla "Identities"
+            var identity = _context.Identities.FirstOrDefault(i => i.Id == 1);
 
+            // Si no se encuentra el registro, devolver uno vacío o manejar el error
+            if (identity == null)
             {
-                var identity = new Identity { Id = 1, Nombre = "Juan", Correo = "juan@example.com" };
-                return View(identity); // Pasando un solo objeto Identity
+                identity = new Identity { Id = 0, Nombre = "No encontrado", Correo = "n/a" };
             }
+
+            // Pasar el objeto identity a la vista
+            return View(identity);
         }
-            // POST: Home/Index
-            [HttpPost]
+
+        // POST: Home/Index
+        [HttpPost]
         public IActionResult Create(Identity model)
         {
             if (ModelState.IsValid)

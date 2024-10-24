@@ -15,6 +15,7 @@
             padding: 0;
             min-height: 100vh;
             display: flex;
+            flex-direction: column;
             justify-content: center;
             align-items: center;
             background-image: url('/images/R.jpg');
@@ -28,11 +29,13 @@
             font-size: 48px;
         }
 
-        .form-container {
+        .form-container, .table-container {
             background: rgba(255, 255, 255, 0.8);
             padding: 20px;
             border-radius: 10px;
             box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            margin-top: 20px;
+            width: 400px; /* Ajusta el ancho */
         }
 
             .form-container label {
@@ -63,11 +66,29 @@
                 .form-container input[type="submit"]:hover {
                     background-color: #0056b3;
                 }
+
+        /* Ajustes para la tabla */
+        table {
+            width: 100%; /* Ajusta el ancho de la tabla */
+            border-collapse: collapse;
+        }
+
+            table th, table td {
+                padding: 10px;
+                border: 1px solid #ccc;
+                text-align: left;
+            }
+
+            table th {
+                background-color: #007bff;
+                color: white;
+            }
     </style>
 </head>
 <body>
     <div>
         <h1 style="text-align:center">¡Bienvenido esta es la pagina de Superboy!</h1>
+
         <div class="form-container">
             <form method="post" asp-controller="Home" asp-action="Create">
                 <div>
@@ -85,26 +106,28 @@
                 <button type="submit">Enviar</button>
             </form>
         </div>
-    </div>
-<h2 style="color:white">Lista de Identidades</h2>
-<h2 style="color:white">Detalles de Identidad</h2>
+        <br><br>
+        <h2 style="color:white; text-align:left;">Lista de Identidades</h2>
 
-<table class="form-container" border="1" cellpadding="5" cellspacing="0">
-    <thead>     
-<tr>
-<th>ID</th>     
-<th>Nombre</th>
-<th>Correo</th>
-</tr>
-    </thead>
-</thead>
-    <tbody>
-        <tr>
-<td>@Model.Id</td>
-<td>@Model.Nombre</td>
-<td>@Model.Correo</td>
-        </tr>
-</tbody>
-</table>
+        <div class="table-container">
+            <table>
+                <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>Nombre</th>
+                        <th>Correo</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>@Model.Id</td>
+                        <td>@Model.Nombre</td>
+                        <td>@Model.Correo</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
 </body>
 </html>
+
