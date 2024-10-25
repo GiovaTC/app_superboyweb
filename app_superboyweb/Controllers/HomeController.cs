@@ -16,7 +16,7 @@ namespace app_superboyweb.Controllers
             _context = context;
         }
 
-        // GET: Home/Index
+/*        // GET: Home/Index
         [HttpGet]
         public IActionResult Index()
         {
@@ -32,8 +32,28 @@ namespace app_superboyweb.Controllers
             // Pasar el objeto identity a la vista
             return View(identity);
         }
+*/
+        // GET: Home/Index
+        [HttpGet]
+        public IActionResult Index() //listar
+        {
+            // Intenta recuperar todos los registros, si la tabla puede estar vacía
+            var identities = _context.Identities.ToList();
 
-        // POST: Home/Index
+            // Si no hay registros en la base de datos, crea una colección temporal con un solo registro vacío
+            if (!identities.Any())
+            {
+                identities = new List<Identity>
+        {
+            new Identity { Id = 0, Nombre = "No encontrado", Correo = "n/a" }
+        };
+            }
+
+            // Pasar la lista a la vista, asegurando que siempre sea una colección
+            return View(identities);
+        }
+
+        // POST: Home/Index 
         [HttpPost]
         public IActionResult Create(Identity model)
         {
@@ -41,9 +61,11 @@ namespace app_superboyweb.Controllers
             {
                 _context.Identities.Add(model); // Agregar nuevo registro
                 _context.SaveChanges();         // Guardar en la base de datos
-                return RedirectToAction("Index");
+                return RedirectToAction("Index"); // Redirigir a la lista de identidades
             }
-            return View(model);
+
+            // Si hay un error, regresa a la vista con el modelo
+            return View("Index", new List<Identity> { model }); // Pasar una colección con el nuevo objeto
         }
     }
 }
