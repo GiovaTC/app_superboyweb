@@ -1,6 +1,6 @@
 # app_superboyweb
 
-![image](https://github.com/user-attachments/assets/bea00464-4c55-4477-87af-a45321a50d94)
+![image](https://github.com/user-attachments/assets/2d57bdad-e3ca-4369-80f6-b7b86942e092)
 
 
 
